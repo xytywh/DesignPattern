@@ -22,6 +22,8 @@ public:
     virtual ~Library() {} //基类虚构函数要virtual
 
 protected:
+
+    // 稳定的写成非虚方法
     void Step1()
     { //稳定
         //.....
@@ -35,6 +37,7 @@ protected:
         //.....
     }
 
+    // 变化的写成虚函数
     virtual bool Step2() = 0; //变化，交给子类实现
     virtual void Step4() = 0; //变化，交给子类实现
 };
