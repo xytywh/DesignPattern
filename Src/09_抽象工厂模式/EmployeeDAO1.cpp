@@ -1,10 +1,8 @@
 
-class EmployeeDAO
-{
+class EmployeeDAO {
 
 public:
-    vector<EmployeeDO> GetEmployees()
-    {
+    vector <EmployeeDO> GetEmployees() {
         SqlConnection *connection = new SqlConnection();
         connection->ConnectionString = "...";
 
@@ -13,8 +11,7 @@ public:
         command->SetConnection(connection);
 
         SqlDataReader *reader = command->ExecuteReader();
-        while (reader->Read())
-        {
+        while (reader->Read()) {
         }
     }
 };

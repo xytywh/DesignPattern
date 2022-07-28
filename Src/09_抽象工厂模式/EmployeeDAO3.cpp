@@ -1,68 +1,67 @@
 //数据库访问有关的基类
-class IDBConnection
-{
+class IDBConnection {
 };
 
-class IDBCommand
-{
+class IDBCommand {
 };
-class IDataReader
-{
+
+class IDataReader {
 };
+
 //一个统一的工厂类，可以创建多个对象
-class IDBFactory
-{
+class IDBFactory {
 public:
     virtual IDBConnection *CreateDBConnection() = 0;
+
     virtual IDBCommand *CreateDBCommand() = 0;
+
     virtual IDataReader *CreateDataReader() = 0;
 };
 
 //支持SQL Server
-class SqlConnection : public IDBConnection
-{
+class SqlConnection : public IDBConnection {
 };
-class SqlCommand : public IDBCommand
-{
+
+class SqlCommand : public IDBCommand {
 };
-class SqlDataReader : public IDataReader
-{
+
+class SqlDataReader : public IDataReader {
 };
-class SqlDBFactory : public IDBFactory
-{
+
+class SqlDBFactory : public IDBFactory {
 public:
     virtual IDBConnection *CreateDBConnection() = 0;
+
     virtual IDBCommand *CreateDBCommand() = 0;
+
     virtual IDataReader *CreateDataReader() = 0;
 };
 
 //支持Oracle
-class OracleConnection : public IDBConnection
-{
+class OracleConnection : public IDBConnection {
 };
 
-class OracleCommand : public IDBCommand
-{
+class OracleCommand : public IDBCommand {
 };
 
-class OracleDataReader : public IDataReader
-{
+class OracleDataReader : public IDataReader {
 };
-class OracleBFactory : public IDBFactory
-{
+
+class OracleBFactory : public IDBFactory {
 public:
+    // 高内聚  三个高度相关的工厂放到一个工厂创建基类中
     virtual IDBConnection *CreateDBConnection() = 0;
+
     virtual IDBCommand *CreateDBCommand() = 0;
+
     virtual IDataReader *CreateDataReader() = 0;
 };
 
-class EmployeeDAO
-{
+class EmployeeDAO {
     IDBFactory *dbFactory;
 
 public:
-    vector<EmployeeDO> GetEmployees()
-    {
+    vector <EmployeeDO> GetEmployees() {
         IDBConnection *connection = dbFactory->CreateDBConnection();
         connection->ConnectionString("...");
 
@@ -71,8 +70,7 @@ public:
         command->SetConnection(connection); //关联性
 
         IDBDataReader *reader = command->ExecuteReader(); //关联性
-        while (reader->Read())
-        {
+        while (reader->Read()) {
         }
     }
 };
