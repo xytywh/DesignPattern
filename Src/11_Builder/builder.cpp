@@ -1,53 +1,54 @@
-class House
-{
+class House {
     //....
 };
 
-class HouseBuilder
-{
+class HouseBuilder {
 public:
     House *GetResult() //返回一个House对象
     {
         return pHouse;
     }
+
     virtual ~HouseBuilder() {}
 
 protected:
     House *pHouse;
+
     virtual void BuildPart1() = 0;
+
     virtual void BuildPart2() = 0;
+
     virtual void BuildPart3() = 0;
+
     virtual void BuildPart4() = 0;
+
     virtual void BuildPart5() = 0;
 };
 
-class StoneHouse : public House
-{
+class StoneHouse : public House {
 };
 
-class StoneHouseBuilder : public HouseBuilder
-{
+class StoneHouseBuilder : public HouseBuilder {
 protected:
-    virtual void BuildPart1()
-    {
+    virtual void BuildPart1() {
         //pHouse->Part1 = ...;
     }
-    virtual void BuildPart2()
-    {
+
+    virtual void BuildPart2() {
     }
-    virtual void BuildPart3()
-    {
+
+    virtual void BuildPart3() {
     }
-    virtual void BuildPart4()
-    {
+
+    virtual void BuildPart4() {
     }
-    virtual void BuildPart5()
-    {
+
+    virtual void BuildPart5() {
     }
 };
+
 //稳定的部分
-class HouseDirector
-{
+class HouseDirector {
 public:
     HouseBuilder *pHouseBuilder;
 
@@ -56,19 +57,17 @@ public:
         this->pHouseBuilder = pHouseBuilder;
     }
 
-    House *Construct()//按照确定的顺序执行构建过程
+    House *Construct()//按照确定的顺序执行构建过程  有点像模板方法 不同之处在于模板方法那里是成员函数  而这里是创建新对象
     {
         pHouseBuilder->BuildPart1();
 
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             pHouseBuilder->BuildPart2();
         }
 
         bool flag = pHouseBuilder->BuildPart3();
 
-        if (flag)
-        {
+        if (flag) {
             pHouseBuilder->BuildPart4();
         }
 
